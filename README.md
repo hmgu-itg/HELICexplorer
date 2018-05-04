@@ -1,5 +1,5 @@
-#HELIC meta-analysis
-
+# HELIC meta-analysis
+ Below is a table of manhattan plots, QQ plots and signal files generated using `man_qq_annotate` and `peakplotter`. You will need to download the signals files as GitHub does not currently allow displaying live HTML pages.
 ## Manhattan and QQ plots
 
 Trait | Files | Signals
