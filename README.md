@@ -1,5 +1,5 @@
 # HELIC meta-analysis
- Below is a table of manhattan plots, QQ plots and signal files generated using `man_qq_annotate` and `peakplotter`. You will need to download the signals files as GitHub does not currently allow displaying live HTML pages.
+ Below is a table of manhattan plots, QQ plots and signal files for the HELIC high-depth meta-analysis which were generated using `man_qq_annotate` and `peakplotter`. You will need to download the signals files as GitHub does not currently allow displaying live HTML pages.
 ## Manhattan and QQ plots
 
 Trait | Files | Signals
@@ -53,3 +53,13 @@ WBC|[QQ-plot](qq_man/WBC/HELIC.WBC.qq.pdf)<br>[Manhattan plot](qq_man/WBC/HELIC.
 Weight|[QQ-plot](qq_man/Weight/HELIC.Weight.qq.pdf)<br>[Manhattan plot](qq_man/Weight/HELIC.Weight.man.pdf) | [4:105210152](data/Weight/4.105210152.106210152.peakdata.ld.html)<br>
 WHR|[QQ-plot](qq_man/WHR/HELIC.WHR.qq.pdf)<br>[Manhattan plot](qq_man/WHR/HELIC.WHR.man.pdf) | [8:79096451](data/WHR/8.79096451.80096451.peakdata.ld.html)<br>
 WHRBMIadj|[QQ-plot](qq_man/WHRBMIadj/HELIC.WHRBMIadj.qq.pdf)<br>[Manhattan plot](qq_man/WHRBMIadj/HELIC.WHRBMIadj.man.pdf) | [11:124333530](data/WHRBMIadj/11.124333530.125333530.peakdata.ld.html)<br>[12:65379945](data/WHRBMIadj/12.65379945.66379945.peakdata.ld.html)<br>[12:91780696](data/WHRBMIadj/12.91780696.92780696.peakdata.ld.html)<br>[13:78541886](data/WHRBMIadj/13.78541886.79541886.peakdata.ld.html)<br>[14:33799974](data/WHRBMIadj/14.33799974.34799974.peakdata.ld.html)<br>[15:35854459](data/WHRBMIadj/15.35854459.36854459.peakdata.ld.html)<br>[19:13958045](data/WHRBMIadj/19.13958045.14958045.peakdata.ld.html)<br>[2:11326999](data/WHRBMIadj/2.11326999.12326999.peakdata.ld.html)<br>[2:17126484](data/WHRBMIadj/2.17126484.18463285.peakdata.ld.html)<br>[2:201802072](data/WHRBMIadj/2.201802072.204253201.peakdata.ld.html)<br>[2:220809221](data/WHRBMIadj/2.220809221.221809221.peakdata.ld.html)<br>[3:190953083](data/WHRBMIadj/3.190953083.191953083.peakdata.ld.html)<br>[4:5542829](data/WHRBMIadj/4.5542829.6542829.peakdata.ld.html)<br>[5:128900608](data/WHRBMIadj/5.128900608.129900608.peakdata.ld.html)<br>[5:132904432](data/WHRBMIadj/5.132904432.133904432.peakdata.ld.html)<br>[7:141441699](data/WHRBMIadj/7.141441699.142441699.peakdata.ld.html)<br>[7:87682380](data/WHRBMIadj/7.87682380.88682380.peakdata.ld.html)<br>[9:11981270](data/WHRBMIadj/9.11981270.12981270.peakdata.ld.html)<br>[9:19495362](data/WHRBMIadj/9.19495362.20495362.peakdata.ld.html)<br>
+
+## About this page
+
+This page was generated automatically by running:
+
+```bash
+find ../ihatesophie/ -name "*man*" | sed 's/.*phie.//;s/\/.*//' | sort -u | while read d; do mkdir -p qq_man/$d && cp ../ihatesophie/$d/HELIC.$d.man.pdf ../ihatesophie/$d/HELIC.$d.qq.pdf qq_man/$d; done
+find ../ihatesophie/ -name "*peakdata*html" | sed 's/.*phie.//;s/\/.*//' | sort -u | while read d; do mkdir -p data/$d && cp ../ihatesophie/$d/*peakdata*html data/$d; done
+cat <(echo -e "# HELIC meta-analysis\n Below is a table of manhattan plots, QQ plots and signal files generated using "'`'"man_qq_annotate"'`'" and "'`'"peakplotter"'`'". You will need to download the signals files as GitHub does not currently allow displaying live HTML pages.\n## Manhattan and QQ plots\n\nTrait | Files | Signals\n---|---|---") <(paste -d "|" <(ls qq_man) <(for t in `ls qq_man`; do echo -n "[QQ-plot](qq_man/$t/HELIC.$t.qq.pdf)<br>[Manhattan plot](qq_man/$t/HELIC.$t.man.pdf) | "; for i in `ls data/$t`; do n=$(echo $i | sed 's/\./:/;s/\..*//');echo -n "[$n](data/$t/$i)<br>";done;echo;done))> README.md
+```
