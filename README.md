@@ -59,7 +59,7 @@ WHRBMIadj|[QQ-plot](qq_man/WHRBMIadj/HELIC.WHRBMIadj.qq.pdf)<br>[Manhattan plot]
 This page was generated automatically by running:
 
 ```bash
-find ../ihatesophie/ -name "*man*" | sed 's/.*phie.//;s/\/.*//' | sort -u | while read d; do mkdir -p qq_man/$d && cp ../ihatesophie/$d/HELIC.$d.man.pdf ../ihatesophie/$d/HELIC.$d.qq.pdf qq_man/$d; done
-find ../ihatesophie/ -name "*peakdata*html" | sed 's/.*phie.//;s/\/.*//' | sort -u | while read d; do mkdir -p data/$d && cp ../ihatesophie/$d/*peakdata*html data/$d; done
+find -name "*man*" | sed 's/.*phie.//;s/\/.*//' | sort -u | while read d; do mkdir -p qq_man/$d && cp ../ihatesophie/$d/HELIC.$d.man.pdf ../ihatesophie/$d/HELIC.$d.qq.pdf qq_man/$d; done
+find -name "*peakdata*html" | sed 's/.*phie.//;s/\/.*//' | sort -u | while read d; do mkdir -p data/$d && cp ../ihatesophie/$d/*peakdata*html data/$d; done
 cat <(echo -e "# HELIC meta-analysis\n Below is a table of manhattan plots, QQ plots and signal files generated using "'`'"man_qq_annotate"'`'" and "'`'"peakplotter"'`'". You will need to download the signals files as GitHub does not currently allow displaying live HTML pages.\n## Manhattan and QQ plots\n\nTrait | Files | Signals\n---|---|---") <(paste -d "|" <(ls qq_man) <(for t in `ls qq_man`; do echo -n "[QQ-plot](qq_man/$t/HELIC.$t.qq.pdf)<br>[Manhattan plot](qq_man/$t/HELIC.$t.man.pdf) | "; for i in `ls data/$t`; do n=$(echo $i | sed 's/\./:/;s/\..*//');echo -n "[$n](data/$t/$i)<br>";done;echo;done))> README.md
 ```
